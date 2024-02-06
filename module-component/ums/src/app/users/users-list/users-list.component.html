@@ -1,0 +1,48 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Fiscal Code</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Province</th>
+      <th scope="col">Json</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!--Dati caricati a runtime-->
+    <!--Nuova sintassi-->
+    @for (user of users; track user.email; let i = $index) {
+      <!--<app-user [cnt]=i [user] = user></app-user> binding one-way-->
+      <tr>
+        <th>{{i + 1}}</th>
+        <th>{{user.name}}</th>
+        <th>{{user.lastName}}</th>
+        <th>{{user.email}}</th>
+        <th>{{user.fiscalCode}}</th>
+        <th>{{user.phoneNumber}}</th>
+        <th>{{user.province}}</th>
+        <th>{{user | json}}</th>
+        <td><button (click)="deleteUser(user)" class="delete-button">Delete</button></td>
+      </tr>
+
+    }
+    @empty {<li>No items</li>
+    }
+    <!--Vecchia sintassi-->
+    <!--
+    <tr *ngFor="let user of users; let i = index; trackBy: trackUser">
+      <th>{{i + 1}}</th>
+      <th>{{user.name}}</th>
+      <th>{{user.lastName}}</th>
+      <th>{{user.email}}</th>
+      <th>{{user.fiscalCode}}</th>
+      <th>{{user.phoneNumber}}</th>
+      <th>{{user.province}}</th>
+      <th>{{user | json}}</th>
+    </tr>
+  -->
+  </tbody>
+</table>

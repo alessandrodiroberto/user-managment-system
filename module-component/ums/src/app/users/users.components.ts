@@ -1,7 +1,0 @@
-import { Component } from "@angular/core";
-
-@Component({
-
-})
-class UsersComponent {
-}

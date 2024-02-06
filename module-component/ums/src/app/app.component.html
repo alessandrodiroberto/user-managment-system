@@ -332,5 +332,7 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<app-users-list [users]="users" (userDeleted)="onDeletedUser($event)"></app-users-list>
+
 
 <router-outlet />

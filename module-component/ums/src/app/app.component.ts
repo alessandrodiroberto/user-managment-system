@@ -7,7 +7,11 @@ import { User, UserService } from './users/user.services';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'ums';
+  userCols = 12;
+  formCol = 0;
+
+  title = 'User Managment System';
+  selectedUser: User | null = null;
   userService = inject(UserService);
   users = this.userService.getUsers(); //Viene passato nel app.component.html [users]="users"
 
@@ -17,6 +21,22 @@ export class AppComponent {
   }
 
   showUserForm(user: User): void {
-    alert('edit');
+    if (user != this.selectedUser) {
+      this.selectedUser = user;
+      this.showForm(true);
+    } else {
+      this.selectedUser = null;
+      this.showForm(false);
+    }
+  }
+
+  private showForm(v: boolean) {
+    if (!v) {
+      this.userCols = 12;
+      this.formCol = 0;
+    } else {
+      this.userCols = 8;
+      this.formCol = 8;
+    }
   }
 }

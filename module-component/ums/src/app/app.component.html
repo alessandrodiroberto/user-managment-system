@@ -6,13 +6,16 @@
 <main class="flex-shrink-0">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-{{userCols}}">
+        <h1>{{title}}</h1>
         <app-users-list [users]="users" (userDeleted)="onDeletedUser($event)"
           (userToBeUpdated)="showUserForm($event)"></app-users-list>
       </div>
-      <div class="col-md-4">
-        <app-user-form></app-user-form>
-      </div>
+      @if (selectedUser) {
+        <div class="col-md-{{formCol}}">
+          <app-user-form [user] = "selectedUser"></app-user-form>
+        </div>
+      }
     </div>
   </div>
 </main>

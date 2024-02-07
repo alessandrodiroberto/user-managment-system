@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersModule} from './users/users.module';
 import { ThemeTogglerComponent } from './theme-toggler/theme-toggler.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThemeTogglerComponent,
+    FooterComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,

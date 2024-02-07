@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -17,15 +17,15 @@
     @for (user of users; track user.email; let i = $index) {
       <!--<app-user [cnt]=i [user] = user></app-user> binding one-way-->
       <tr>
-        <th>{{i + 1}}</th>
-        <th>{{user.name}}</th>
-        <th>{{user.lastName}}</th>
-        <th>{{user.email}}</th>
-        <th>{{user.fiscalCode}}</th>
-        <th>{{user.phoneNumber}}</th>
-        <th>{{user.province}}</th>
-        <th>{{user | json}}</th>
-        <td><button (click)="deleteUser(user)" class="delete-button">Delete</button></td>
+        <td><span class="text-body-secondary">{{i + 1}}</span></td>
+        <td>{{user.name}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.fiscalCode}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.province}}</td>
+        <td>{{user | json}}</td>
+        <td><button (click)="deleteUser(user)" class="btn btn-danger">Delete</button></td>
       </tr>
 
     }

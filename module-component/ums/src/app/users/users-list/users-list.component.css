@@ -1,33 +1,9 @@
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.delete-button{
+.delete-button {
   background-color: red;
   color: white;
 }
 
-.delete-button:hover{
+.delete-button:hover {
   background-color: #b45b64;
   color: white;
-}
-
-th,
-td {
-  padding: 8px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #e8eee8;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
 }

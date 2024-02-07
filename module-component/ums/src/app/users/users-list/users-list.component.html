@@ -25,10 +25,21 @@
       <td>{{user.phoneNumber}}</td>
       <td>{{user.province}}</td>
       <td>{{user | json}}</td>
-      <td><button (click)="deleteUser(user)" class="btn btn-danger">
-          <i class="bi bi-trash"></i></button></td>
+      <td>
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col">
+            <button class="btn btn-primary" (click)="updateUser(user)">
+              <i class="bi bi-pen"></i>
+            </button>
+          </div>
+          <div class="col">
+            <button class="btn btn-danger" (click)="deleteUser(user)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </td>
     </tr>
-
     }
     @empty {<li>No items</li>
     }

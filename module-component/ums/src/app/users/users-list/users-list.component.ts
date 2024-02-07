@@ -9,6 +9,7 @@ import { User, UserService } from '../user.services';
 })
 export class UsersListComponent /* implements OnInit */ {
   @Output() userDeleted = new EventEmitter<User>();
+  @Output() userToBeUpdated = new EventEmitter<User>();
   @Input() users: User[] = [];
 
   deleteUser(user: User): void {
@@ -16,6 +17,10 @@ export class UsersListComponent /* implements OnInit */ {
     this.users = this.getUsers();
     */
     this.userDeleted.emit(user);
+  }
+
+  updateUser(user: User): void {
+    this.userToBeUpdated.emit(user);
   }
 
   /*

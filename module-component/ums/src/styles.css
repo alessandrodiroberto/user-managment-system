@@ -1,7 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-.container {
+main > .container-fluid {
+  padding: 60px;
+}
+main > .container,
+.container-fluid {
   width: auto;
-  padding: 100px 0px;
+  min-width: 780px;
+  padding: 0 15px;
 }
 
 .bd-placeholder-img {
@@ -21,10 +25,11 @@
 .b-example-divider {
   width: 100%;
   height: 3rem;
-  background-color: rgba(0, 0, 0, .1);
-  border: solid rgba(0, 0, 0, .15);
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
   border-width: 1px 0;
-  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
 }
 
 .b-example-vr {
@@ -34,7 +39,7 @@
 }
 
 .bi {
-  vertical-align: -.125em;
+  vertical-align: -0.125em;
   fill: currentColor;
 }
 

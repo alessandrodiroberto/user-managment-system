@@ -15,4 +15,8 @@ export class AppComponent {
     this.userService.deleteUser(user);
     this.users = this.userService.getUsers();
   }
+
+  showUserForm(user: User):void{
+
+  }
 }

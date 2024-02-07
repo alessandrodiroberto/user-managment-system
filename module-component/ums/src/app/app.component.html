@@ -1,17 +1,20 @@
-<router-outlet>
+<header>
+  <app-nav-bar></app-nav-bar>
+</header>
 
-  <header>
-    <app-nav-bar></app-nav-bar>
-  </header>
-
-  <!-- Begin page content -->
-  <main class="flex-shrink-0">
-    <div class="container">
-      <app-users-list [users]="users" (userDeleted)="onDeletedUser($event)"></app-users-list>
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col col-md-8">
+        <app-users-list [users]="users" (userDeleted)="onDeletedUser($event)"
+          (userToBeUpdated)="showUserForm($event)"></app-users-list>
+      </div>
+      <div class="col col-md-4">
+        User form
+      </div>
     </div>
-  </main>
-
-  <app-footer></app-footer>
-  <app-theme-toggler></app-theme-toggler>
-
-  <router-outlet />
+  </div>
+</main>
+<app-footer></app-footer>
+<app-theme-toggler></app-theme-toggler>

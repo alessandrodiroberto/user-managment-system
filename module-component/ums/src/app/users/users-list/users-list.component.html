@@ -15,18 +15,19 @@
     <!--Dati caricati a runtime-->
     <!--Nuova sintassi-->
     @for (user of users; track user.email; let i = $index) {
-      <!--<app-user [cnt]=i [user] = user></app-user> binding one-way-->
-      <tr>
-        <td><span class="text-body-secondary">{{i + 1}}</span></td>
-        <td>{{user.name}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.fiscalCode}}</td>
-        <td>{{user.phoneNumber}}</td>
-        <td>{{user.province}}</td>
-        <td>{{user | json}}</td>
-        <td><button (click)="deleteUser(user)" class="btn btn-danger">Delete</button></td>
-      </tr>
+    <!--<app-user [cnt]=i [user] = user></app-user> binding one-way-->
+    <tr>
+      <td><span class="text-body-secondary">{{i + 1}}</span></td>
+      <td>{{user.name}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.fiscalCode}}</td>
+      <td>{{user.phoneNumber}}</td>
+      <td>{{user.province}}</td>
+      <td>{{user | json}}</td>
+      <td><button (click)="deleteUser(user)" class="btn btn-danger">
+          <i class="bi bi-trash"></i></button></td>
+    </tr>
 
     }
     @empty {<li>No items</li>

@@ -13,7 +13,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     AppComponent,
     ThemeTogglerComponent,
     FooterComponent,
-    NavBarComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

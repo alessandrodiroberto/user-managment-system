@@ -9,14 +9,14 @@ import { User, UserService } from './users/user.services';
 export class AppComponent {
   title = 'ums';
   userService = inject(UserService);
-  users = this.userService.getUsers();  //Viene passato nel app.component.html [users]="users"
+  users = this.userService.getUsers(); //Viene passato nel app.component.html [users]="users"
 
   onDeletedUser(user: User): void {
     this.userService.deleteUser(user);
     this.users = this.userService.getUsers();
   }
 
-  showUserForm(user: User):void{
-
+  showUserForm(user: User): void {
+    alert('edit');
   }
 }

@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { User, UserService } from '../user.services';
+import { Router } from '@angular/router';
 
 @Component({
   //providers: [UserService], //se abilitato, verrà creata una istanza per ogni component app-users-list in app.component.html
@@ -7,10 +14,18 @@ import { User, UserService } from '../user.services';
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css',
 })
-export class UsersListComponent /* implements OnInit */ {
+export class UsersListComponent implements OnInit {
   @Output() userDeleted = new EventEmitter<User>();
-  @Output() userToBeUpdated = new EventEmitter<User>();
-  @Input() users: User[] = [];
+
+  router = inject(Router);
+  userService = inject(UserService);
+
+  //@Output() userToBeUpdated = new EventEmitter<User>(); //con router non più necessario
+  /*@Input()*/ users: User[] = [];
+
+  ngOnInit(): void {
+    this.users = this.userService.getUsers();
+  }
 
   deleteUser(user: User): void {
     /*this.userService.deleteUser(user);
@@ -20,7 +35,10 @@ export class UsersListComponent /* implements OnInit */ {
   }
 
   updateUser(user: User): void {
-    this.userToBeUpdated.emit(user);
+    //this.userToBeUpdated.emit(user);
+
+    //Modo 1 : DA CODICE  TS, altriemnti da html con routerLink
+    //this.router.navigate(['users', user.id]);
   }
 
   /*

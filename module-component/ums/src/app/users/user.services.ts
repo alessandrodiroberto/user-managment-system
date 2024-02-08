@@ -110,8 +110,18 @@ export class UserService {
       }));
   }
 
+  userExist(id: number): boolean {
+    const idx = this.users.findIndex((u) => u.id === id);
+    return idx !== -1;
+  }
+
   getUsers(): User[] {
     return this.users;
+  }
+
+  getUser(id: number): User | null {
+    const exist = this.userExist(id);
+    return exist ? { ...this.users[id] } : null;
   }
 
   deleteUser(user: User) {
@@ -123,7 +133,7 @@ export class UserService {
     const idx = this.users.findIndex((u) => u.id === user.id);
     const v: boolean = idx === -1;
 
-    if (!v) this.users[idx] = { ...user };
+    if (this.userExist(user.id)) this.users[user.id] = { ...user };
 
     return v;
   }

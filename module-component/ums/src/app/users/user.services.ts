@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { json } from 'stream/consumers';
-import { isExternal } from 'util/types';
 
 export interface User {
   id: number;
@@ -93,9 +91,9 @@ const getRandomElement = (array: any[]) =>
   providedIn: 'root', //In questo modo verrà creata una istanza per tutti i componenti
 })
 export class UserService {
-
   userUpdated = new Subject<User>(); //Oggetto che cambia valore observable
-  userDeleted = new Subject<User>;
+  userDeleted = new Subject<User>();
+  userAdded = new Subject<User>();
   //userDeleted = new BehaviorSubject<User | null>(null); //Con valore di default
 
   users: User[] = [];
@@ -114,6 +112,18 @@ export class UserService {
         phoneNumber: getRandomElement(phoneNumbers),
         province: getRandomElement(provinces),
       }));
+  }
+
+  defaultUser(): User {
+    return {
+      id: 0,
+      name: '',
+      lastName: '',
+      email: '',
+      fiscalCode: '',
+      phoneNumber: '',
+      province: '',
+    };
   }
 
   userExist(id: number): number {
@@ -141,5 +151,30 @@ export class UserService {
     if (v) this.users[idx] = { ...user };
 
     return v;
+  }
+
+  createUser(user: User): boolean {
+    const isValid =
+      this.findUserByEmail(user.email) !== -1 &&
+      this.findUserByFiscalCode(user.fiscalCode) !== -1;
+
+    if (!isValid) {
+      const len: number = this.users.length;
+
+      user.id = len + 1;
+      this.users.push(user);
+    } else {
+      alert('user already exist!');
+    }
+
+    return isValid;
+  }
+
+  findUserByEmail(email: string): number {
+    return this.users.findIndex((u) => u.email === email);
+  }
+
+  findUserByFiscalCode(fiscalCode: string): number {
+    return this.users.findIndex((u) => u.fiscalCode === fiscalCode);
   }
 }

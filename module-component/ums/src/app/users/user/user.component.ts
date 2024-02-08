@@ -7,8 +7,9 @@ import { User } from '../user.services';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input() user: User; //in questo modo è visibile in users-list.component.html
-  @Input({
+  //@Input() user: User; //in questo modo è visibile in users-list.component.html
+
+  /* @Input({
     required: true,
     alias: 'cnt',
     transform: (v: number) => v + 1,
@@ -17,7 +18,7 @@ export class UserComponent {
 
   constructor() {
     this.user = {
-      id: -1,
+      id: 0,
       name: '',
       lastName: '',
       email: '',
@@ -26,4 +27,5 @@ export class UserComponent {
       province: '',
     };
   }
+  */
 }

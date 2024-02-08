@@ -13,6 +13,7 @@ export class AppComponent implements OnDestroy {
 
   private userUpdatedSub: Subscription;
   private userDeletedSub: Subscription;
+  private userCreated: Subscription;
 
   constructor() {
     this.userUpdatedSub = this.userService.userUpdated.subscribe((u) => {
@@ -21,11 +22,15 @@ export class AppComponent implements OnDestroy {
     this.userDeletedSub = this.userService.userDeleted.subscribe((u) => {
       this.onDeletedUser(u);
     });
+    this.userCreated = this.userService.userAdded.subscribe((u) => {
+      this.onUserCreated(u);
+    });
   }
 
   ngOnDestroy(): void {
     this.userUpdatedSub.unsubscribe();
     this.userDeletedSub.unsubscribe();
+    this.userCreated.unsubscribe();
   }
 
   private onDeletedUser(user: User): void {
@@ -34,5 +39,9 @@ export class AppComponent implements OnDestroy {
 
   private onUserUpdated(user: User) {
     this.userService.updateUser(user);
+  }
+
+  private onUserCreated(user: User) {
+    this.userService.createUser(user);
   }
 }

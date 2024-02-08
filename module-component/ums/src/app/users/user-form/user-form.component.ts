@@ -1,15 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  inject,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { User, UserService } from '../user.services';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
@@ -26,18 +18,28 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((p) => {
-      const id = Number(p.get('id'));
-      this.user = this.userService.getUser(id);
+      const segment = p.get('id'); //null se ha va nella rotta create
+
+      if (segment) {
+        const id = Number(segment);
+        this.user = this.userService.getUser(id);
+      } else {
+        this.user = this.userService.defaultUser();
+      }
     });
   }
 
   onSubmitForm(form: NgForm) {
     const userUpdate: User = { ...form.value, id: this.user?.id ?? 0 };
 
-    //this.userService.updateUser(userUpdate);
-    this.userService.userUpdated.next(userUpdate);
-    this.router.navigateByUrl('users');
+    if (!this.user?.id) {
+      this.userService.userAdded.next(form.value);
+    } else {
+      //this.userService.updateUser(userUpdate);
+      this.userService.userUpdated.next(userUpdate);
+    }
 
-    form.reset();
+    this.router.navigateByUrl('users');
+    //form.reset();
   }
 }

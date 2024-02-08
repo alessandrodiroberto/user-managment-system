@@ -25,13 +25,11 @@
   <div class="mb-3">
     <label for="fiscalCode" class="form-label">Fiscal Code</label>
     <input type="text" #fiscalCode="ngModel"
-      pattern="^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1})$|([0-9]{11})$"
       required [(ngModel)]="user.fiscalCode" id="fiscalCode" name="fiscalCode" class="form-control"
       placeholder="Fiscal Code">
     @if (fiscalCode.invalid && (fiscalCode.dirty || fiscalCode.touched)) {
     <div class="alert alert-danger">
       <div *ngIf="fiscalCode.errors?.['required']">Fiscal code is required</div>
-      <div *ngIf="fiscalCode.errors?.['pattern']">Fiscal code is incorrect</div>
     </div>
     }
   </div>

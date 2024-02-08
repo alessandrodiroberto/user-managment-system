@@ -110,9 +110,8 @@ export class UserService {
       }));
   }
 
-  userExist(id: number): boolean {
-    const idx = this.users.findIndex((u) => u.id === id);
-    return idx !== -1;
+  userExist(id: number): number {
+    return this.users.findIndex((u) => u.id === id);
   }
 
   getUsers(): User[] {
@@ -120,20 +119,20 @@ export class UserService {
   }
 
   getUser(id: number): User | null {
-    const exist = this.userExist(id);
-    return exist ? { ...this.users[id] } : null;
+    const idx = this.userExist(id);
+    return idx !== -1 ? { ...this.users[idx] } : null;
   }
 
   deleteUser(user: User) {
-    const idx = this.users.findIndex((u) => u.email == user.email);
+    const idx = this.userExist(user.id);
     this.users.splice(idx, 1);
   }
 
   updateUser(user: User): boolean {
-    const idx = this.users.findIndex((u) => u.id === user.id);
-    const v: boolean = idx === -1;
+    const idx = this.userExist(user.id);
+    const v = idx !== -1;
 
-    if (this.userExist(user.id)) this.users[user.id] = { ...user };
+    if (v) this.users[idx] = { ...user };
 
     return v;
   }

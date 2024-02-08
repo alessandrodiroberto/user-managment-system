@@ -17,7 +17,7 @@
     @for (user of users; track user.email; let i = $index) {
     <!--<app-user [cnt]=i [user] = user></app-user> binding one-way-->
     <tr>
-      <td><span class="text-body-secondary">{{i + 1}}</span></td>
+      <td><span class="text-body-secondary">{{user.id}}</span></td>
       <td>{{user.name}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.email}}</td>

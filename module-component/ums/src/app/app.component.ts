@@ -8,7 +8,6 @@ import { User, UserService } from './users/user.services';
 })
 export class AppComponent {
   userCols = 12;
-  formCol = 0;
 
   title = 'User Managment System';
   selectedUser: User | null = null;
@@ -17,9 +16,22 @@ export class AppComponent {
 
   onDeletedUser(user: User): void {
     this.userService.deleteUser(user);
+    this.refreshTableData();
+  }
+
+  onUserUpdated(user: User) {
+    this.userService.updateUser(user);
+    this.refreshTableData();
+
+    this.selectedUser = null;
+    this.showForm(false);
+  }
+
+  private refreshTableData() {
     this.users = this.userService.getUsers();
   }
 
+  /*
   showUserForm(user: User): void {
     if (user != this.selectedUser) {
       this.selectedUser = user;
@@ -29,14 +41,19 @@ export class AppComponent {
       this.showForm(false);
     }
   }
+  */
+
+  showUserForm(user: User): void {
+    if (user.id != this.selectedUser?.id) {
+      this.selectedUser = { ...user }; //Creo una copia di user e lo passo. Stessa cosa di Object.assign({}, user)
+      this.showForm(true);
+    } else {
+      this.selectedUser = null;
+      this.showForm(false);
+    }
+  }
 
   private showForm(v: boolean) {
-    if (!v) {
-      this.userCols = 12;
-      this.formCol = 0;
-    } else {
-      this.userCols = 8;
-      this.formCol = 8;
-    }
+    this.userCols = !v ? 12 : 9;
   }
 }

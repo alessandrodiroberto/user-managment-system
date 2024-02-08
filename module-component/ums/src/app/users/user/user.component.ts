@@ -17,6 +17,7 @@ export class UserComponent {
 
   constructor() {
     this.user = {
+      id: -1,
       name: '',
       lastName: '',
       email: '',

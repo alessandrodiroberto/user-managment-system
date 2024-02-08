@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { json } from 'stream/consumers';
+import { isExternal } from 'util/types';
 
 export interface User {
+  id: number;
   name: string;
   lastName: string;
   email: string;
@@ -92,9 +95,12 @@ export class UserService {
   users: User[] = [];
 
   constructor() {
+    let index = 1;
+
     this.users = Array(10)
       .fill(0)
       .map(() => ({
+        id: index++,
         name: getRandomElement(names),
         lastName: getRandomElement(lastNames),
         email: getRandomElement(emails),
@@ -108,8 +114,17 @@ export class UserService {
     return this.users;
   }
 
-  deleteUser(user: User){
-    const idx = this.users.findIndex((u)=> u.email == user.email);
+  deleteUser(user: User) {
+    const idx = this.users.findIndex((u) => u.email == user.email);
     this.users.splice(idx, 1);
+  }
+
+  updateUser(user: User): boolean {
+    const idx = this.users.findIndex((u) => u.id === user.id);
+    const v: boolean = idx === -1;
+
+    if (!v) this.users[idx] = { ...user };
+
+    return v;
   }
 }

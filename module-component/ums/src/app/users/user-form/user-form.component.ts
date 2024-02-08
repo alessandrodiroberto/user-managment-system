@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { User } from '../user.services';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { User, UserService } from '../user.services';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-form',
@@ -7,5 +8,18 @@ import { User } from '../user.services';
   styleUrl: './user-form.component.css',
 })
 export class UserFormComponent {
-  @Input() user: User | null = null;
+  userService = inject(UserService);
+
+  //@Input() user: User | null = null;
+  @Input() user: Partial<User> = {}; //Con Partial, do la possibilità che all'oggetto di non essere nullo, ma solo alcuni dei capi lo possono essere
+  @Output() updatedUser = new EventEmitter<User>();
+
+  onSubmitForm(form: NgForm) {
+    const userUpdate: User = { ...form.value, id: this.user.id ?? 0 };
+
+    //this.userService.updateUser(userUpdate);
+    this.updatedUser.emit(userUpdate);
+
+    form.reset();
+  }
 }

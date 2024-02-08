@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { json } from 'stream/consumers';
 import { isExternal } from 'util/types';
 
@@ -92,6 +93,11 @@ const getRandomElement = (array: any[]) =>
   providedIn: 'root', //In questo modo verrà creata una istanza per tutti i componenti
 })
 export class UserService {
+
+  userUpdated = new Subject<User>(); //Oggetto che cambia valore observable
+  userDeleted = new Subject<User>;
+  //userDeleted = new BehaviorSubject<User | null>(null); //Con valore di default
+
   users: User[] = [];
 
   constructor() {

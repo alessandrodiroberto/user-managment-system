@@ -9,6 +9,7 @@ import {
 import { User, UserService } from '../user.services';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
@@ -20,8 +21,7 @@ export class UserFormComponent implements OnInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  //@Input() user: User | null = null;
-  /*ora tramite routing @Input()*/ user: User | null = null; //Con Partial, do la possibilità che all'oggetto di non essere nullo, ma solo alcuni dei capi lo possono essere
+  user: User | null = null;
   @Output() updatedUser = new EventEmitter<User>();
 
   ngOnInit(): void {
@@ -35,9 +35,7 @@ export class UserFormComponent implements OnInit {
     const userUpdate: User = { ...form.value, id: this.user?.id ?? 0 };
 
     //this.userService.updateUser(userUpdate);
-    //this.updatedUser.emit(userUpdate);
-
-    this.userService.updateUser(userUpdate);
+    this.userService.userUpdated.next(userUpdate);
     this.router.navigateByUrl('users');
 
     form.reset();
